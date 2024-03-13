@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import logo from "./assets/logo.png";
 import mailSvg from "./assets/mail.svg";
 import manSvg from "./assets/man.svg";
 import womanSvg from "./assets/woman.svg";
@@ -8,19 +10,56 @@ import mapSvg from "./assets/map.svg";
 import phoneSvg from "./assets/phone.svg";
 import padlockSvg from "./assets/padlock.svg";
 import Footer from "./components/footer/Footer";
+import axios from "axios";
 
-const url = "https://randomuser.me/api/";
-const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
 
 function App() {
+  const defaultImage = "https://randomuser.me/api/portraits/men/75.jpg";
+
+  const [people,SetPeople] = useState([])
+  const [loading,setLoading] = useState(true)
+  const BASE_URL = "https://randomuser.me/api/";
+
+
+
+  const getRandomPeople = async()=> {
+
+    try {
+       const response =  await axios.get(BASE_URL)
+       
+       if(response.status !== 200) {
+         throw new Error("Data is not fetched")
+        }
+        SetPeople(response.data.results)
+    } catch (error) {
+      console.log(error);
+    }
+ 
+
+  
+}
+  
+  useEffect(()=>{
+   
+    getRandomPeople()
+  },[])
+
+  console.log(people);
+
+
   return (
     <main>
-
-      <div className="block">
+   
+{people.map((person)=>(
+  
+  <div key={person.id} className="block">  
+  <div className="block bcg-orange">
+        <img src={logo} alt="logo" id="logo" />
+      </div>
         <div className="container">
-          <img src={defaultImage} alt="random user" className="user-img" />
+          <img src={person.picture.medium} alt="random user" className="user-img" />
           <p className="user-title">My ... is</p>
-          <p className="user-value"></p>
+          <p className="user-value">{person.name.first} {person.name.last}</p>
           <div className="values-list">
             <button className="icon" data-label="name">
               <img src={womanSvg} alt="user" id="iconImg" />
@@ -42,7 +81,7 @@ function App() {
             </button>
           </div>
           <div className="btn-group">
-            <button className="btn" type="button">
+            <button onClick={()=>getRandomPeople()} className="btn" type="button">
               new user
             </button>
             <button className="btn" type="button">
@@ -65,6 +104,8 @@ function App() {
           </table>
         </div>
       </div>
+))}
+      
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Footer />
       </div>
