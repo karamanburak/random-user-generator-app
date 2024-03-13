@@ -126,7 +126,7 @@ p {
     max-width: 730px;
     background: var(--clr-white);
     margin: 0 auto;
-    margin-top: -200px;
+    margin-top: -130px;
     border-radius: var(--radius);
     position: relative;
     text-align: center;
@@ -199,8 +199,8 @@ p {
     height: 50px;
 }
 
-#cw {
-    width: 75px;
+#logo {
+    width: 150px;
     margin-top: 50px;
 }
 
