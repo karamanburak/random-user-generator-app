@@ -48,30 +48,49 @@ function App() {
 
   console.log(people);
 
-const addNewUser = (e) => {
-  console.log(e);
+const icons = (data) => [
+  {
+    svg: data.gender === "male" ? manSvg : womanSvg,
+    key: "name",
+    value: `${data.name.first} ${data.name.last}`
+  },
+  {svg: mailSvg, key: "mail", value: "data.email"},
+  {svg:data.gender === "male" ? manAgeSvg : womanAgeSvg, key: "age", value: data.dob.age},
+  {
+    svg:mapSvg,
+    key:"street",
+    value: `${data.location.street.number} ${data.location.street.name}`
+  },
+  {
+    svg: phoneSvg,
+    key: "phone number",
+    value: "data.cell"
+  },
+  {
+    svg: padlockSvg,
+    key: "password",
+    value: "data.login.password"
+  },
+]
 
-}
-
-
+if (!userData) return null
+const iconData = icons(userData)
 
 
   return (
     <main>
-   
-{people && people.map((person)=>(
-  
+     
   <div key={person.id} className="block">  
   <div className="block bcg-orange">
         <img src={logo} alt="logo" id="logo" />
       </div>
         <div className="container">
-          <img src= {person.picture.medium} alt="random user" className="user-img" />
-          <p className="user-title">{`My name is`}</p>
-      <p className="user-value">{person.name.first} {person.name.last}</p>
+          <img src= {person.picture.large} alt="random user" className="user-img" />
+          <p className="user-title">My{iconData[activeIcon].key} is</p>
+      <p className="user-value">{iconData[activeIcon]}</p>
           <div className="values-list">
             <button className="icon" data-label="name">
-          <img src={person.gender === "male" ? manSvg : womanSvg} alt="user" id="iconImg" 
+          <img src={svgIcon.svg} alt="user" id="iconImg" 
             onMouseOver={() => {
   
             }}
@@ -118,7 +137,7 @@ const addNewUser = (e) => {
         </button> : <button onClick={()=>getUserData()} className="btn" type="button">
               new user
             </button>}  
-            <button onClick={(e)=> addNewUser()} className="btn" type="button">
+            <button className="btn" type="button">
               add user
             </button>
           </div>
@@ -138,7 +157,6 @@ const addNewUser = (e) => {
           </table>
         </div>
       </div>
-))}
       
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Footer />
