@@ -1,5 +1,7 @@
 # Random-User-Generator-App
 
+[Live Demo](https://random-user-generator-app.netlify.app/)
+
 ## Description
 
 - This is a simple React application that generates random user information using the [Random User Generator API](https://randomuser.me/). The app displays a default user image along with various user details such as name, email, age, address, phone, and password. Additionally, it provides options to fetch a new random user or add the current user to a table.
