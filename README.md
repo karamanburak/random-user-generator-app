@@ -29,7 +29,7 @@ SOLUTION
 ├── package.json
 └── README.md
 ```
-## Expected Outcome
+## Outcome
 
 ![Project Snapshot](./random-user-app.gif)
 
@@ -41,16 +41,6 @@ SOLUTION
 - Click the "new user" button to fetch and display a new random user.
 - Click the "add user" button to add the current user's information to the table
 
-
-### At the end of the project, following topics are to be covered;
-
-- HTML
-
-- CSS
-
-- JS
-
-- ReactJS
 
 ## Steps to Solution
 
